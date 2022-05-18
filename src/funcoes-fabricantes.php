@@ -28,3 +28,17 @@ function inserirFabricante(PDO $conexao, string $nome):void {
         die("Erro: " .$erro->getMessage());
     }
 }
+
+function lerUmFabricante(PDO $conexao, int $id):array {
+    $sql = "SELECT id, nome FROM fabricantes WHERE id = :id";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+        $consulta->execute();
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $erro) {
+        die("Erro: ".$erro->getMessage());
+    }
+    return $resultado;
+}

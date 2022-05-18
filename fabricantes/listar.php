@@ -27,6 +27,7 @@ $listaDeFabricantes = lerFabricantes($conexao) ?>
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
+                    <th colspan="2">Operações</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +70,8 @@ ajuste o foreach para exibir cada dado em seu respectivo lugar, ou seja, o valor
    <tr>
        <td> <?=$fabricante["id"]?> </td>
        <td> <?=$fabricante["nome"]?> </td>
+       <td><a href="atualizar.php?id=<?=$fabricante['id']?>"> Atualizar </a></td>
+       <td><a href=""> Excluir </a></td>
    </tr>
 
    <?php
