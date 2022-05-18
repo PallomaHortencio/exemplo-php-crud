@@ -1,4 +1,10 @@
+<?php
+require_once '../src/funcoes-fabricantes.php';
+/* Obtendo o valor do parametro URL */
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
+$fabricante = lerUmFabricante($conexao, $id);
+?>
 
 
 <!DOCTYPE html>
@@ -15,9 +21,10 @@
         <hr>
 
         <form action="" method="post">
+            <input type="hidden" name="<?=$fabricante['id']?>">
             <p>
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome">
+                <input value="<?=$fabricante['nome']?>" type="text" name="nome" id="nome">
             </p>
             <button type="submit" name="atualizar">
                 Atualizar fabricante</button>
