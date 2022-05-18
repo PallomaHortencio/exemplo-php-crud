@@ -15,7 +15,7 @@
         <ul>
             <li><a href="fabricantes/listar.php">Fabricantes</a></li>
             <li><a href="">Produtos</a></li>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ad numquam corporis ullam necessitatibus tempore iusto fugiat explicabo facere, dolores veritatis natus cumque officia perspiciatis corrupti, magnam quia et dolor?</p>
+
         </ul>
     </div>
     
