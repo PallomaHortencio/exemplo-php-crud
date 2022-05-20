@@ -56,3 +56,4 @@ function atualizarFabricante(PDO $conexao, int $id, string $nome):void {
             die("Erro: ".$erro->getMessage());
         }
 }
+?>
