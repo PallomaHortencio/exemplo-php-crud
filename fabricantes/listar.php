@@ -73,7 +73,9 @@ ajuste o foreach para exibir cada dado em seu respectivo lugar, ou seja, o valor
        <td> <?=$fabricante["id"]?> </td>
        <td> <?=$fabricante["nome"]?> </td>
        <td><a href="atualizar.php?id=<?=$fabricante['id']?>"> Atualizar </a></td>
-       <td><a href="excluir.php?id=<?=$fabricante['id']?>"> Excluir </a></td>
+       <td>
+         <!--  <a onclick="return confirm('Deseja realmente excluir?')" </a> -->
+        <a class="excluir" href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a></td>
    </tr>
 
    <?php
@@ -83,6 +85,16 @@ ajuste o foreach para exibir cada dado em seu respectivo lugar, ou seja, o valor
         </table>
     </div>
   
+    <script>
+       const links = document.querySelectorAll('.excluir');
+       for( let i = 0; i < links.length; i++ ){
+           links[i].addEventListener("click", function(event){
+               event.preventDefault();
+               let resposta = confirm("Deseja realmente excluir?");
+               if(resposta) location.href = links[i].getAttribute('href');
+           });
+       }
+   </script>
     
 </body>
 </html>
