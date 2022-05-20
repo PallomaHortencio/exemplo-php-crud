@@ -20,7 +20,10 @@ $listaDeFabricantes = lerFabricantes($conexao) ?>
                 Inserir um novo fabricante
             </a>
         </p>
-        
+
+        <?php if(isset($_GET['status']) && $_GET['status'] == 'sucesso') { ?>
+        <p>Fabricante atualizado com sucesso!</p>
+         <?php } ?>
         <table>
             <caption>Lista de Fabricantes</caption>
             <thead>
@@ -32,7 +35,6 @@ $listaDeFabricantes = lerFabricantes($conexao) ?>
             </thead>
             <tbody>
 <?php
-
 
 /*   
  codigos na pagina de funcoes-fabricantes
@@ -71,7 +73,7 @@ ajuste o foreach para exibir cada dado em seu respectivo lugar, ou seja, o valor
        <td> <?=$fabricante["id"]?> </td>
        <td> <?=$fabricante["nome"]?> </td>
        <td><a href="atualizar.php?id=<?=$fabricante['id']?>"> Atualizar </a></td>
-       <td><a href=""> Excluir </a></td>
+       <td><a href="excluir.php?id=<?=$fabricante['id']?>"> Excluir </a></td>
    </tr>
 
    <?php
