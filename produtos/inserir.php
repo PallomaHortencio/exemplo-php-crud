@@ -1,3 +1,24 @@
+<?php
+require_once '../src/funcoes-fabricantes.php';
+$listaDeFabricantes = lerFabricantes($conexao);
+
+if(isset($_POST['inserir'])){
+    require_once '../src/funcoes-produtos.php';
+    
+    
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+    $fabricantesId = filter_input(INPUT_POST, 'fabricantes', FILTER_SANITIZE_NUMBER_INT);
+
+    inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricantesId);
+
+    header("location:listar.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -29,8 +50,20 @@
 
             <p>
             <label for="fabricante">Fabricante:</label>
-                <select name="fabricante" id="preco" required>
+                <select name="fabricantes" id="preco" required>
                 <option value=""></option>
+
+                <!-- programar um foreach para <option value='id'>nome</option> -->
+                <?php
+                foreach($listaDeFabricantes as $fabricantes) {
+                 ?>  
+                 <option value="<?=$fabricantes['id']?>">
+                 <?=$fabricantes['nome']?>  <!-- exibição -->
+                </option>  
+                <?php 
+                } 
+                 ?>
+               
 
                 </select>
             </p>
@@ -38,7 +71,7 @@
             <!-- opções de fabricantes existentes no banco -->
 
             <p>
-            <label for="descricao">Descrição</label>
+            <label for="descricao">Descrição:</label>
             <textarea required name="descricao" id="descricao" cols="30" rows="3"></textarea>
            </p>
 

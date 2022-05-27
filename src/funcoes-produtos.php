@@ -16,6 +16,28 @@ try {
 }
 
 
+function inserirProduto(PDO $conexao, string $nome, float $preco, int $quantidade, string $descricao, int $fabricantesId):void {
+//Void indica sem retorno
+
+    $sql = "INSERT INTO produtos(nome, preco, quantidade, descricao, fabricantes_id) VALUES(:nome, :preco, :quantidade, :descricao, :fabricantes_id)";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $consulta->bindParam(':preco', $preco, PDO::PARAM_STR);
+        $consulta->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
+        $consulta->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $consulta->bindParam(':fabricantes_id', $fabricantesId, PDO::PARAM_INT);
+
+        $consulta->execute();
+
+    } catch (Exception $erro) {
+        die("Erro: " .$erro->getMessage());
+    }
+}
+
+
+
 /*  Funções Utilitarias */
 
 function formataMoeda(float $valor):string {
