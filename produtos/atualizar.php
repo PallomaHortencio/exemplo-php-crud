@@ -57,12 +57,12 @@ nao sei se ta certo
 
             <p>
                 <label for="preco">Preço:</label>
-                <input type="number" name="preco" id="preco" min="0" max="10000" step="0.01" required>
+                <input value="<?=$produto['preco']?>" type="number" name="preco" id="preco" min="0" max="10000" step="0.01" required>
             </p>
 
             <p>
             <label for="quantidade">Quantidade:</label>
-                <input type="number" name="quantidade" id="quantidade" min="0" max="100" required>
+                <input value="<?=$produto['quantidade']?>" type="number" name="quantidade" id="quantidade" min="0" max="100" required>
             </p>
 
             <p>
@@ -74,7 +74,12 @@ nao sei se ta certo
                 <?php
                 foreach($listaDeFabricantes as $fabricantes) {
                  ?>  
-                 <option value="<?=$fabricantes['id']?>">
+                 <option 
+                  <?php  
+                  /* Se chave estrangeira for idêntica á chave primaria (ou seja, se o código do fabricante do produto bater com o código do fabricante), então coloque o atributo selected no option */
+                 if($produto['fabricantes_id'] === $fabricantes['id']) echo " selected ";
+                 ?>  
+                 value="<?=$fabricantes['id']?>">
                  <?=$fabricantes['nome']?>  <!-- exibição -->
                 </option>  
                 <?php 
@@ -89,7 +94,7 @@ nao sei se ta certo
 
             <p>
             <label for="descricao">Descrição:</label>
-            <textarea required name="descricao" id="descricao" cols="30" rows="3"></textarea>
+            <textarea required name="descricao" id="descricao" cols="30" rows="3"><?=$produto['descricao']?></textarea>
            </p>
 
             <button type="submit" name="inserir">
