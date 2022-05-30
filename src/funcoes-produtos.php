@@ -35,45 +35,44 @@ function inserirProduto(PDO $conexao, string $nome, float $preco, int $quantidad
         die("Erro: " .$erro->getMessage());
     }
 
-
-    /* atualizar */
-
-    function lerUmProduto(PDO $conexao, int $id):array {
-        $sql = "SELECT id, nome, preco, quantidade, descricao, fabricantes_id FROM produtos WHERE id = :id";
-
-        try {
-            $consulta = $conexao->prepare($sql);
-            $consulta->bindParam(':id', $id, PDO::PARAM_INT);
-            $consulta->execute();
-            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-        }   catch (Exception $erro) {
-            die("Erro: " .$erro->getMessage());
-        }
-        return $resultado;
-    }
-
-
-/* não sei se ta certo
-    function atualizarProduto(PDO $conexao, string $nome, float $preco, int $quantidade, string $descricao, int $fabricantesID):void {
-        $sql = "UPDATE produtos SET (nome, preco, quantidade, descricao, fabricantes_id) WHERE (:nome, :preco, :quantidade, :descricao, :fabricantes_id)";
-
-        try {
-            $consulta = $conexao->prepare($sql);
-            $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
-            $consulta->bindParam(':preco', $preco, PDO::PARAM_STR);
-            $consulta->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
-            $consulta->bindParam(':descricao', $descricao, PDO::PARAM_STR);
-            $consulta->bindParam(':fabricantes_id', $fabricantesId, PDO::PARAM_INT);
-    
-            $consulta->execute();
-    
-        } catch (Exception $erro) {
-            die("Erro: " .$erro->getMessage());
-        }
-        }
-   */ }
+}
  
+   
+   function lerUmProduto(PDO $conexao, int $id):array {
+    $sql = "SELECT id, nome, preco, quantidade, descricao, fabricantes_id FROM produtos WHERE id = :id";
 
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+        $consulta->execute();
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+    }   catch (Exception $erro) {
+        die("Erro: " .$erro->getMessage());
+    }
+    return $resultado;
+}
+
+
+/* Atualizar */
+function atualizarProduto(PDO $conexao, int $id, string $nome, float $preco, int $quantidade, string $descricao, int $fabricantesId) {
+  $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, descricao = :descricao, fabricantes_id = :fabricantes_id WHERE id = :id";
+
+  try {
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindParam(':id', $id, PDO::PARAM_STR);
+    $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+    $consulta->bindParam(':preco', $preco, PDO::PARAM_STR);
+    $consulta->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
+    $consulta->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+    $consulta->bindParam(':fabricantes_id', $fabricantesId, PDO::PARAM_INT);
+
+    $consulta->execute();
+
+} catch (Exception $erro) {
+    die("Erro: " .$erro->getMessage());
+}
+
+}
 
 /*  Funções Utilitarias */
 

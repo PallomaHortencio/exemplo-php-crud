@@ -10,12 +10,8 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 /* chamando a função e recebendo os dados do produto */
 $produto = lerUmProduto($conexao, $id);
 
-dump($produto);
 
 
-
-/*
-nao sei se ta certo
  if(isset($_POST['atualizar'])){
     
 
@@ -25,10 +21,10 @@ nao sei se ta certo
     $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
     $fabricantesId = filter_input(INPUT_POST, 'fabricantes', FILTER_SANITIZE_NUMBER_INT);
 
-    atualizarProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricantesId);
+    atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricantesId);
 
     header("location:listar.php");
-} */
+} 
 ?>
 
 

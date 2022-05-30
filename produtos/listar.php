@@ -12,10 +12,10 @@ $listaDeProdutos = lerProdutos($conexao);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Lista</title>
     <style>
-        .atualizar { color:darkmagenta;}
-        .excluir { color: darkmagenta; }
-        .inserir { color: darkmagenta;}
-        .home { color: darkmagenta;}
+        .atualizar { color:mediumturquoise;}
+        .excluir { color:mediumturquoise; }
+        .inserir { color:mediumturquoise;}
+        .home { color:mediumturquoise;}
     </style>
 </head>
 <body>
