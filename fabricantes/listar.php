@@ -85,15 +85,8 @@ ajuste o foreach para exibir cada dado em seu respectivo lugar, ou seja, o valor
         </table>
     </div>
   
-    <script>
-       const links = document.querySelectorAll('.excluir');
-       for( let i = 0; i < links.length; i++ ){
-           links[i].addEventListener("click", function(event){
-               event.preventDefault();
-               let resposta = confirm("Deseja realmente excluir?");
-               if(resposta) location.href = links[i].getAttribute('href');
-           });
-       }
+    <script src="../js/confirm.js">
+   
    </script>
     
 </body>

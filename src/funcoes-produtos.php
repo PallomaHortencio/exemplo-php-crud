@@ -1,7 +1,7 @@
 <?php
 require_once "conecta.php";
 
-function lerProdutos(PDO $conexao) {
+function lerProdutos(PDO $conexao):array {
 /* $sql = "SELECT id, nome, descricao, preco, quantidade, fabricantes_id FROM produtos ORDER BY nome"; */
 $sql = "SELECT produtos.id, produtos.nome, produtos.preco, produtos.descricao, produtos.quantidade, fabricantes.nome AS fabricante FROM produtos INNER JOIN fabricantes ON produtos.fabricantes_id = fabricantes.id ORDER BY fabricantes.nome";
 
@@ -59,7 +59,7 @@ function atualizarProduto(PDO $conexao, int $id, string $nome, float $preco, int
 
   try {
     $consulta = $conexao->prepare($sql);
-    $consulta->bindParam(':id', $id, PDO::PARAM_STR);
+    $consulta->bindParam(':id', $id, PDO::PARAM_INT);
     $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
     $consulta->bindParam(':preco', $preco, PDO::PARAM_STR);
     $consulta->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
@@ -73,6 +73,23 @@ function atualizarProduto(PDO $conexao, int $id, string $nome, float $preco, int
 }
 
 }
+
+
+/* Excluir */
+function excluirProduto(PDO $conexao, int $id):void {
+    $sql = "DELETE FROM produtos WHERE id = :id";
+  
+    try {
+      $consulta = $conexao->prepare($sql);
+      $consulta->bindParam(':id', $id, PDO::PARAM_INT);;
+  
+      $consulta->execute();
+  
+  } catch (Exception $erro) {
+      die("Erro: " .$erro->getMessage());
+  }
+  
+  }
 
 /*  Funções Utilitarias */
 

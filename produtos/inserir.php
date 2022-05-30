@@ -50,7 +50,7 @@ if(isset($_POST['inserir'])){
 
             <p>
             <label for="fabricante">Fabricante:</label>
-                <select name="fabricantes" id="preco" required>
+                <select name="fabricantes" id="fabricantes" required>
                 <option value=""></option>
 
                 <!-- programar um foreach para <option value='id'>nome</option> -->

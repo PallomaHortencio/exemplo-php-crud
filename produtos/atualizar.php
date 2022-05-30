@@ -25,6 +25,8 @@ $produto = lerUmProduto($conexao, $id);
 
     header("location:listar.php");
 } 
+
+
 ?>
 
 
@@ -63,7 +65,7 @@ $produto = lerUmProduto($conexao, $id);
 
             <p>
             <label for="fabricante">Fabricante:</label>
-                <select name="fabricantes" id="preco" required>
+                <select name="fabricantes" id="fabricantes" required>
                 <option value=""></option>
 
                 <!-- programar um foreach para <option value='id'>nome</option> -->
@@ -93,7 +95,7 @@ $produto = lerUmProduto($conexao, $id);
             <textarea required name="descricao" id="descricao" cols="30" rows="3"><?=$produto['descricao']?></textarea>
            </p>
 
-            <button type="submit" name="inserir">
+            <button type="submit" name="atualizar">
                 Atualizar Produtos</button>
         </form>
 

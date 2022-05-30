@@ -48,6 +48,8 @@ $listaDeProdutos = lerProdutos($conexao);
     </tr> 
     </table>
 
+
+
     <h3>Nome: <?=$produtos["nome"]?> </h3>
     <p>Preço: <?=number_format($produtos["preco"], 2, ",", ".")?> </p> <!-- 1 jeito -->
 
@@ -66,7 +68,7 @@ $listaDeProdutos = lerProdutos($conexao);
     ?>
     
     
-    
+    <script src="../js/confirm.js"></script>
 
     
 </body>
