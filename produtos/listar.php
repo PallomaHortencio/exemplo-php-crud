@@ -1,8 +1,15 @@
 <?php
-require_once "../src/funcoes-produtos.php";
-$listaDeProdutos = lerProdutos($conexao);
-/* dump($listaDeProdutos); */
+
+use CrudPoo\Produto;
+
+require_once "../vendor/autoload.php";
+
+$produto = new Produto;
+
+$listaDeProdutos = $produto->lerProdutos();
 ?>
+<pre><?= var_dump($listaDeProdutos)?></pre>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -51,7 +58,7 @@ $listaDeProdutos = lerProdutos($conexao);
 
 
     <h3>Nome: <?=$produtos["nome"]?> </h3>
-    <p>Preço: <?=number_format($produtos["preco"], 2, ",", ".")?> </p> <!-- 1 jeito -->
+    <p>Preço: R$ <?=number_format($produtos["preco"], 2, ",", ".")?> </p> <!-- 1 jeito -->
 
     <!-- <p>Preço: <?=formataMoeda($produtos['preco'])?></p>  2 jeito com funcao, em funcoes-produtos.php -->
 
