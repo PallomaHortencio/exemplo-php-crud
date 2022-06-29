@@ -69,6 +69,3 @@ function excluirFabricante(PDO $conexao, int $id):void {
         die("Erro: " .$erro->getMessage());
     }
 }
-
-
-
