@@ -8,7 +8,7 @@ $produto = new Produto;
 
 $listaDeProdutos = $produto->lerProdutos();
 ?>
-<pre><?= var_dump($listaDeProdutos)?></pre>
+
 
 
 <!DOCTYPE html>
@@ -59,8 +59,6 @@ $listaDeProdutos = $produto->lerProdutos();
 
     <h3>Nome: <?=$produtos["nome"]?> </h3>
     <p>Preço: R$ <?=number_format($produtos["preco"], 2, ",", ".")?> </p> <!-- 1 jeito -->
-
-    <!-- <p>Preço: <?=formataMoeda($produtos['preco'])?></p>  2 jeito com funcao, em funcoes-produtos.php -->
 
     <p>Quantidade: <?=$produtos["quantidade"]?> </p>
     <p>Descrição: <?=$produtos["descricao"]?> </p>

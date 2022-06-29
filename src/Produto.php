@@ -18,16 +18,7 @@ final class Produto{
     }
 
     public function lerProdutos():array {
-    $sql = "SELECT
-                produtos.id,
-                produtos.nome AS nome,
-                produtos.preco,
-                produtos.descricao,
-                produtos.quantidade,
-                fabricantes.nome AS fabricante
-            FROM produtos INNER JOIN fabricantes
-            ON produtos.fabricantes_id = fabricantes.id
-            ORDER BY produto";
+        $sql = "SELECT produtos.id, produtos.nome, produtos.preco, produtos.descricao, produtos.quantidade, fabricantes.nome AS fabricante FROM produtos INNER JOIN fabricantes ON produtos.fabricantes_id = fabricantes.id ORDER BY fabricantes.nome";
 
     try {
         $consulta = $this->conexao->prepare($sql);
@@ -38,7 +29,66 @@ final class Produto{
     }
     return $resultado;
 }
+
+
+public function inserirProduto():void {
+    //Void indica sem retorno
+    
+        $sql = "INSERT INTO produtos(nome, preco, quantidade, descricao, fabricantes_id) VALUES(:nome, :preco, :quantidade, :descricao, :fabricantes_id)";
+    
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':nome', $this->nome, PDO::PARAM_STR);
+            $consulta->bindParam(':preco', $this->preco, PDO::PARAM_STR);
+            $consulta->bindParam(':quantidade', $this->quantidade, PDO::PARAM_INT);
+            $consulta->bindParam(':descricao', $this->descricao, PDO::PARAM_STR);
+            $consulta->bindParam(':fabricantes_id', $this->fabricantesId, PDO::PARAM_INT);
+    
+            $consulta->execute();
+    
+        } catch (Exception $erro) {
+            die("Erro: " .$erro->getMessage());
+        }
+    
+    }
+
+
+    public function atualizarProduto():void {
+        $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, descricao = :descricao, fabricantes_id = :fabricantes_id WHERE id = :id";
+      
+        try {
+          $consulta = $this->conexao->prepare($sql);
+          $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+          $consulta->bindParam(':nome', $this->nome, PDO::PARAM_STR);
+          $consulta->bindParam(':preco', $this->preco, PDO::PARAM_STR);
+          $consulta->bindParam(':quantidade', $this->quantidade, PDO::PARAM_INT);
+          $consulta->bindParam(':descricao', $this->descricao, PDO::PARAM_STR);
+          $consulta->bindParam(':fabricantes_id', $this->fabricantesId, PDO::PARAM_INT);
+      
+          $consulta->execute();
+      
+      } catch (Exception $erro) {
+          die("Erro: " .$erro->getMessage());
+      }
+      
+      }
    
+
+      public function excluirProduto():void {
+        $sql = "DELETE FROM produtos WHERE id = :id";
+      
+        try {
+          $consulta = $this->conexao->prepare($sql);
+          $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);;
+      
+          $consulta->execute();
+      
+      } catch (Exception $erro) {
+          die("Erro: " .$erro->getMessage());
+      }
+      
+      }
+    
 
     public function getId(): int
     {
@@ -46,11 +96,10 @@ final class Produto{
     }
 
     
-    public function setId(int $id): self
+    public function setId(int $id)
     {
-        $this->id = $id;
+        $this->id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
-        return $this;
     }
 
    
@@ -59,11 +108,10 @@ final class Produto{
         return $this->nome;
     }
 
-    public function setNome(string $nome): self
+    public function setNome(string $nome)
     {
-        $this->nome = $nome;
+        $this->nome = filter_var($nome, FILTER_SANITIZE_SPECIAL_CHARS);
 
-        return $this;
     }
 
     
@@ -73,11 +121,10 @@ final class Produto{
     }
 
     
-    public function setPreco(float $preco): self
+    public function setPreco(float $preco)
     {
-        $this->preco = $preco;
+        $this->preco = filter_var($preco, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-        return $this;
     }
 
     
@@ -88,11 +135,10 @@ final class Produto{
 
     
      
-    public function setQuantidade(int $quantidade): self
+    public function setQuantidade(int $quantidade)
     {
-        $this->quantidade = $quantidade;
+        $this->quantidade = filter_var($quantidade, FILTER_SANITIZE_NUMBER_INT);
 
-        return $this;
     }
 
    
@@ -102,25 +148,23 @@ final class Produto{
     }
 
    
-    public function setDescricao(string $descricao): self
+    public function setDescricao(string $descricao)
     {
-        $this->descricao = $descricao;
+        $this->descricao = filter_var($descricao, FILTER_SANITIZE_SPECIAL_CHARS);
 
-        return $this;
     }
 
   
-    public function getFabricanteId(): int
+    public function getFabricantesId(): int
     {
-        return $this->fabricanteId;
+        return $this->fabricantesId;
     }
 
    
-    public function setFabricanteId(int $fabricanteId): self
+    public function setFabricantesId(int $fabricantesId)
     {
-        $this->fabricanteId = $fabricanteId;
+        $this->fabricantesId = filter_var($fabricantesId, FILTER_SANITIZE_NUMBER_INT);
 
-        return $this;
     }
 
 }

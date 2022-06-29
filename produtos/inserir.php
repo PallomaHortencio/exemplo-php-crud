@@ -1,18 +1,27 @@
 <?php
-require_once '../src/funcoes-fabricantes.php';
-$listaDeFabricantes = lerFabricantes($conexao);
+
+use CrudPoo\Fabricante;
+use CrudPoo\Produto;
+/* use CrudPoo\{Fabricante, Produto}; uma forma de fazer o USE em uma linha só, quando se tem mais de um NEW*/
+
+require_once '../vendor/autoload.php';
+
+$fabricante = new Fabricante;
+$produto = new Produto;
+
+
+$listaDeFabricantes = $fabricante->lerFabricantes();
 
 if(isset($_POST['inserir'])){
-    require_once '../src/funcoes-produtos.php';
-    
-    
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
-    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-    $fabricantesId = filter_input(INPUT_POST, 'fabricantes', FILTER_SANITIZE_NUMBER_INT);
 
-    inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricantesId);
+    
+    $produto->setNome($_POST['nome']);
+    $produto->setPreco($_POST['preco']);
+    $produto->setQuantidade($_POST['quantidade']);
+    $produto->setDescricao($_POST['descricao']);
+    $produto->setFabricantesId($_POST['fabricantes']);
+
+    $produto->inserirProduto();
 
     header("location:listar.php");
 }
