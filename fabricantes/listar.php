@@ -1,6 +1,10 @@
-<?php require_once "../src/funcoes-fabricantes.php";
-$listaDeFabricantes = lerFabricantes($conexao) ?>
+<?php
+use CrudPoo\Fabricante;
+require_once "../vendor/autoload.php"; 
 
+$fabricante = new Fabricante;
+$listaDeFabricantes = $fabricante->lerFabricantes();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,7 +17,7 @@ $listaDeFabricantes = lerFabricantes($conexao) ?>
     <div class="container">
         <h1>Fabricantes | SELECT - <a href="../index.php">Home</a></h1>
         <hr>
-        <h2>Lendo e carregando todos os Fabricantes</h2>
+        <h2>Lendo e carregando todos os fabricantes</h2>
 
         <p>
             <a href="inserir.php">
@@ -21,9 +25,11 @@ $listaDeFabricantes = lerFabricantes($conexao) ?>
             </a>
         </p>
 
-        <?php if(isset($_GET['status']) && $_GET['status'] == 'sucesso') { ?>
+    
+    <?php if(isset($_GET['status']) && $_GET['status'] == 'sucesso'){ ?>
         <p>Fabricante atualizado com sucesso!</p>
-         <?php } ?>
+    <?php } ?>
+
         <table>
             <caption>Lista de Fabricantes</caption>
             <thead>
@@ -34,60 +40,32 @@ $listaDeFabricantes = lerFabricantes($conexao) ?>
                 </tr>
             </thead>
             <tbody>
+<?php foreach ($listaDeFabricantes as $fabricante) { ?>
+    <tr>
+        <td> <?=$fabricante["id"]?> </td>
+        <td> <?=$fabricante["nome"]?> </td>
+    <td> 
+<a href="atualizar.php?id=<?=$fabricante['id']?>">
+        Atualizar</a> </td>
+<td> 
+
+<!-- <a onclick="return confirm('Deseja realmente excluir?')" -->
+
+
+<a class="excluir" href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a> </td>
+    </tr>
 <?php
+    }
+?>
 
-/*   
- codigos na pagina de funcoes-fabricantes
- string com o comando SQL
- $sql = "SELECT id, nome FROM fabricantes";
-
- preparação do comando
- $consulta = $conexao->prepare($sql);
-
- execução do comando
- $consulta-> execute();
-
-  capturar os resultados
- $resultado = $consulta-> fetchAll(PDO::FETCH_ASSOC); */
-
-
-
- 
-/*  var_dump($resultado); */ //teste
-
-/*  echo "<pre>";
- var_dump($resultado); // teste
- echo "</pre>"; */
-
-
-/* Exercício: 
-ajuste o foreach para exibir cada dado em seu respectivo lugar, ou seja, o valor do id deve aparecer embaixo do cabeçalho id; e o valor do nome deve aparececr embaixo do cabeçalho nome. Tudo isso em cada linha gerada pelo foreach */
-
-
- foreach ($listaDeFabricantes as $fabricante) {
-   /*  echo $fabricante['nome']; */
-
-   ?>
-
-   <tr>
-       <td> <?=$fabricante["id"]?> </td>
-       <td> <?=$fabricante["nome"]?> </td>
-       <td><a href="atualizar.php?id=<?=$fabricante['id']?>"> Atualizar </a></td>
-       <td>
-         <!--  <a onclick="return confirm('Deseja realmente excluir?')" </a> -->
-        <a class="excluir" href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a></td>
-   </tr>
-
-   <?php
- }
-   ?>
             </tbody>
         </table>
+
     </div>
-  
-    <script src="../js/confirm.js">
-   
-   </script>
-    
+
+<script src="../js/confirm.js"></script>
+
+
+
 </body>
 </html>
