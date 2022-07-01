@@ -59,7 +59,7 @@ $listaDeProdutos = $produto->lerProdutos();
 
 
     <h3>Nome: <?=$produtos["nome"]?> </h3>
-    <p>Preço: R$ <?=Utilitarios::trataMoeda($produtos["preco"])?> </p> <!-- 1 jeito -->
+    <p>Preço: <?=Utilitarios::trataMoeda($produtos["preco"])?> </p> <!-- 1 jeito -->
 
     <p>Quantidade: <?=$produtos["quantidade"]?> </p>
     <p>Descrição: <?=$produtos["descricao"]?> </p>
