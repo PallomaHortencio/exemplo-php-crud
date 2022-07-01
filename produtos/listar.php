@@ -8,6 +8,7 @@ require_once "../vendor/autoload.php";
 $produto = new Produto;
 
 $listaDeProdutos = $produto->lerProdutos();
+Utilitarios::teste($listaDeProdutos);
 ?>
 
 
