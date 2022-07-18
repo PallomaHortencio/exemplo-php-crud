@@ -23,6 +23,25 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
             <a href="inserir.php">
                 Inserir um novo fabricante
             </a>
+
+
+            <?php
+            if(isset($_GET['exportarPDF'])){
+
+                // Inicializando uma sessão PHP
+                session_start();
+
+                // Criando uma variavel de sessão
+                $_SESSION["dados"] = $listaDeFabricantes;
+
+                // redirecionando para o script de exportação
+                header("location:../exportar-pdf.php");
+            }
+            ?>
+
+
+            <!-- flag/sinalizador com parâmetro exportarPDF -->
+            <a href="?exportarPDF">Exportar para PDF</a>
         </p>
 
     
