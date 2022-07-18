@@ -7,7 +7,7 @@
     <title>Formulario</title>
 </head>
 <body>
-<form>
+<form action="" method="POST">
 
 <p>
   <label for="nome">Nome:</label>
