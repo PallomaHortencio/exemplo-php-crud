@@ -15,9 +15,8 @@
         <ul>
             <li><a href="fabricantes/listar.php">Fabricantes</a></li>
             <li><a href="produtos/listar.php">Produtos</a></li>
-
         </ul>
     </div>
-    
+    <ul><a href="contato.php">Entre em contato</a></ul>
 </body>
 </html>
