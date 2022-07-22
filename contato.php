@@ -23,18 +23,19 @@ try {
 
     // Configurações do servidor de e-mail
     $mail->isSMTP();
-    $mail->Host = 'paloma@sunioweb.com.br';
+    $mail->Host = 'smtp.titan.email';
     $mail->SMTPAuth = true;
-    $mail->Port = 2525;
-    $mail->Username = 'e4cdf254a9c1de';
-    $mail->Password = '4cb3064efa1480';
+    $mail->Port = 465;
+    $mail->SMTPSecure = 'ssl'; 
+    $mail->Username = 'paloma@sunioweb.com.br';
+    $mail->Password = 'Teste@123';
   
 
     //Quem envia
-    $mail->setFrom('contato@sitecrud.com', 'Site Crud');
+    $mail->setFrom('paloma@sunioweb.com.br ', 'Site Crud');
 
     // Quem recebe
-    $mail->addAddress('fulano@sitecrud.com', 'Fulano');       
+    $mail->addAddress('paloma@sunioweb.com.br ', 'Fulano');       
 
     //Para quem responder
     $mail->addReplyTo($email, 'Retorno contato');
